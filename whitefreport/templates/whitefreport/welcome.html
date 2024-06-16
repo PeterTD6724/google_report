@@ -1,0 +1,47 @@
+{% extends 'whitefreport/main.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        Welcome {{e}}
+        {% endblock title %}
+    </title>
+</head>
+{% block content %}
+
+<body>
+    {% if messages %}
+    <div class="alert alert-success" role="alert">
+        {% for message in messages %}
+        {{ message }} {{e}}
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div class="create_report">
+        Changes to the main base
+        <h2>Welcome to your Firebase <span style="color:rgb(0, 255, 76);padding: 0.3em;background:transparent;">{{e}}
+            </span></h2><br><br>
+        <button type="button" onclick=location.href="{% url 'log' %}" class="btn b">Log out</button>
+    </div>
+
+
+    <div>
+        <button type="button" onclick=location.href="{% url 'create' %}" class="btn b">CREATE REPORT</button>
+
+        <button type="button" onclick=location.href="{% url 'check' %}" class="btn b">GO TO REPORTS</button>
+    </div><br><br>
+    <img src="https://storage.googleapis.com/djtod_ecommerce/categories/python_images/Firebase_front3.png" width="40%"
+        height="auto" alt="">
+
+
+
+</body>
+{% endblock content %}
+
+</html>
