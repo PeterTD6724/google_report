@@ -1,0 +1,129 @@
+{% extends 'whitefreport/main.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        Create {{e}}
+        {% endblock title %}
+    </title>
+</head>
+{% block content %}
+
+<body>
+    {% if messages %}
+    <div class="alert alert-success" role="alert">
+        {% for message in messages %}
+        {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="create_report">
+        <h1>Create report</h1>
+        <h2> User:
+            <span style="color:rgb(8, 244, 79);background:transparent;padding: 0.3em;">{{e}}</span>
+        </h2>
+
+    </div>
+    <button type="button" onclick=location.href="{% url 'check' %}" class="btn b">BACK TO THE MAIN REPORTS</button>
+    <br> <br>
+
+    <div>
+        <form action="/post_create/" method="POST" style="margin-left: 5em;">
+            <div>
+                &nbsp; &nbsp; &nbsp; &nbsp; <input class="create_submit" type="submit" value="SUBMIT"
+                    title=" Submit" /><br><br>
+            </div>
+            <div class="create_data">
+                {% csrf_token %}
+                <div>
+                    Name : <br>
+                    <input type="text" name="task" placeholder="Type Name" required
+                        style="background:rgb(223, 223, 241);color: rgb(111, 10, 243);font-size: 14px;padding:0.5em;width:20vw;"><br><br>
+                    Subject : <br>
+                    <input type="text" name="work" placeholder="Type Subject" required
+                        style="background:rgb(223, 223, 241);color: rgb(111, 10, 243);font-size: 14px;padding:0.5em;width:40vw;"><br><br>
+                    Url : <br>
+                    <input type="text" name="make" placeholder="Type url"
+                        style="background:rgb(223, 223, 241);color: rgb(111, 10, 243);font-size: 14px;padding:0.5em;width:40vw;"><br><br>
+                </div>
+                <div>
+                    Description : <br>
+                    <textarea rows="15" cols="60" name="progress" placeholder="Type the report"
+                        style="background:rgb(223, 223, 241);color: rgb(111, 10, 243);font-size: 16px;padding:0.5em;"></textarea>
+                </div>
+            </div>
+            <br><br>
+
+            <div style="box-shadow: 1px 1px 9px 9px rgb(4, 246, 92);">
+                <span style="padding:0.3em;">UPLOAD IMAGE &rarr;</span>
+                <input type="file" name="files[]" id="files"
+                    style="background:rgb(223, 223, 241);color: rgb(111, 10, 243);font-size: 14px;padding:0.5em;">&nbsp;
+                &nbsp; &nbsp; &nbsp;
+                <input type="hidden" name="url" id="url"> &rarr;
+
+                <button type="button" onclick="uploadimage()">Attach File</button> &nbsp; &nbsp;
+            </div><br><br>
+
+        </form>
+    </div>
+</body>
+
+
+<script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+
+<script>
+
+    var config = {
+        "apiKey": "AIzaSyCvY5jMuYXAwUviHG_MgZVdObauFMCx08I",
+        "databaseURL": "https://whitef-data-b8eff-default-rtdb.europe-west1.firebasedatabase.app",
+        "authDomain": "whitef-data-b8eff.firebaseapp.com",
+        "projectId": "whitef-data-b8eff",
+        "storageBucket": "whitef-data-b8eff.appspot.com",
+        "messagingSenderId": "125886529819",
+        "appId": "1:125886529819:web:53f13806b2596b227413be"
+    };
+
+    firebase.initializeApp(config);
+
+    var metadata = {
+        contentType: 'image/jpg'
+    };
+
+    function uploadimage()
+    {
+        var storage = firebase.storage();
+        var file = document.getElementById("files").files[0];
+        // var storageRef = storage.ref();
+        var storageRef = firebase.storage().ref();
+        var thisref = storageRef.child(file.name).put(file, metadata);
+
+        thisref.on("state_changed", function (snapshot)
+        {
+            console.log("Upload file succesfully");
+        },
+            function (error)
+            {
+
+            },
+            function ()
+            {
+                var downloadURL = thisref.snapshot.downloadURL;
+                console.log("Got URL: ");
+                document.getElementById("url").value = downloadURL;
+                alert("File uploaded successfully");
+            });
+
+    }
+
+</script>
+
+{% endblock content %}
+
+</html>

@@ -1,0 +1,65 @@
+{% extends 'whitefreport/main.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        {{e}}
+        {% endblock title %}
+    </title>
+</head>
+{% block content %}
+
+<body>
+    <div class="main_check">
+        <div class="create_report">
+            <h1>Welcome to Firebase Main Data </h1>
+            <h2>User:<span style="color:rgb(0, 255, 81);background:transparent;padding: 0.3em;"> {{e}} </span>
+                <button type="button" onclick=location.href="{% url 'signin' %}" class="btn b">Log out</button>
+            </h2>
+        </div>
+
+        <div class="search">
+            <button type="button" onclick=location.href="{% url 'create' %}" class="btn b">CREATE NEW REPORT</button>
+
+            <form action="/check/" method="GET" id="find">
+                {% csrf_token %}
+                <input type="search" placeholder="Search..." name="search"
+                    style="padding: 0.5em;background:rgb(196, 215, 241);color: rgb(33, 28, 28);width:20vw;">
+                <input type="hidden" value="{{uid}}">
+                <button type="submit" onclick="location.href='/check/?uid={{uid}}'" form="find">Go</button>
+            </form>
+        </div>
+
+    </div>
+
+    <main class="second_check">
+        <div class="third_check">
+
+            {% for time,dat,work,task,make in comb_lis %}
+            <br>
+
+
+            <span class="fifth_check">
+                <a class="sixth_check" href="/post_check/?z={{time}}" title="{{work}}">VIEW&nbsp;DETAILS</a>
+                Date:&nbsp;{{ dat }} &nbsp;
+
+                Name:
+                <a class="fourth_check" href="/post_check/?z={{time}}" title="{{task}}"> {{ task }}
+                </a> /
+                Subject: <span class="fourth_check">&nbsp;{{ work }}</span> &nbsp;&nbsp;
+
+            </span>
+            {% endfor %}
+
+        </div>
+    </main>
+</body>
+{% endblock content %}
+
+</html>
