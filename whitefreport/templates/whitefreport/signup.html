@@ -25,7 +25,7 @@
 
 <body>
 
-    <h2>Create report sign up page</h2>
+    <h2>Sign up to Google Firebase</h2>
     <a href="{% url 'home' %}" class="btn btn-success float-end text-white" style=" padding: 0.5em;"><i
             class="fa fa-reply"></i>
         &nbsp;Home &amp;</a><br><br>
@@ -42,8 +42,7 @@
             Password :
             <input type="password" name="pass" required placeholder="Set password"
                 style="padding: 0.5em;background:rgb(196, 215, 241);color: rgb(33, 28, 28);width:20vw;"><br><br>
-            <input type="submit" value="SignUp"
-                style="cursor:pointer;padding: 0.5em;background:rgb(62, 134, 228);"><br><br>
+            <input type="submit" value="Sign Up" class="signup_button"><br><br>
             <div><span>Already have an account ?</span>&nbsp; &nbsp;
                 <button type="button" onclick=location.href="{% url 'signin' %}" class="btn b">Signin</button>
             </div>
