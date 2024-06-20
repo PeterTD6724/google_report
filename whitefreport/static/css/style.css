@@ -233,17 +233,24 @@ button:hover {
     text-decoration: none;
 } */
 
-img {
-    border: 3px solid lime;
-}
 
 .image_set {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     width: 100%;
+    height: auto;
+    /* border: 3px solid black; */
+}
+
+.image_postcheck {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: auto;
     background: rgb(129, 239, 11);
-    border: 3px solid black;
+    /* border: 6px solid black; */
 }
 
 .search {
