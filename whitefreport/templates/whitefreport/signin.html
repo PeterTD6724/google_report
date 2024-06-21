@@ -40,10 +40,15 @@
             Password :
             <input type="password" name="pass" required
                 style="padding: 0.5em;background:rgb(196, 215, 241);color: rgb(33, 28, 28);width:20vw;"><br><br>
-            <button type="button" onclick=location.href="{% url 'signup' %}" class="btn b"
-                title="Create an account">Sign up</button> &nbsp; &nbsp;
+            &nbsp; &nbsp;&nbsp; &nbsp;<input class="signin_button" type="submit" value="Sign In"
+                title="Sign in"><br><br>
+
+            <hr>
+            <span>Don't have an account ? </span>&nbsp;
+            <button type="button" onclick=location.href="{% url 'signup' %}" class="btn b" title="Create an account">
+                Sign up</button> &nbsp; &nbsp;
             &nbsp;
-            <input class="signin_button" type="submit" value="Sign In" title="Sign in">
+
 
 
         </form>
